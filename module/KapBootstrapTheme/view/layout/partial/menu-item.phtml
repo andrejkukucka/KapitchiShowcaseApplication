@@ -1,0 +1,82 @@
+<?php
+/**
+ * Kapitchi Zend Framework 2 Modules (http://kapitchi.com/)
+ *
+ * @copyright Copyright (c) 2012-2013 Kapitchi Open Source Team (http://kapitchi.com/open-source-team)
+ * @license   http://opensource.org/licenses/LGPL-3.0 LGPL 3.0
+ * inspired:http://stackoverflow.com/questions/14884572/zend-framework-2-navigation-menu-twitter-bootstrap-integration
+ */
+?>
+
+      <?php 
+    $page = $this->page;
+    $hasChildren = $page->hasPages();
+    if (!$hasChildren):?>
+        <li>
+            <a href="<?=$page->getHref()?>">
+            <?=$this->translate($page->getLabel())?>
+            </a>
+        </li>
+        <?php else:?>
+        <li class="dropdown-submenu">
+            <a href="<?=$page->getHref()?>">
+                <?=$this->translate($page->getLabel())?>
+            </a>
+
+            <?php foreach ($page->getPages() as $child):
+                if (!$this->navigation()->accept($child)) continue;?> 
+                <ul class="dropdown-menu">
+                <?=$this->partial('layout/partial/menu-item', array('page' => $child))
+                ?>
+                </ul>    
+            <?php endforeach ?>
+        </li>
+    <?php endif ?>
+
+
+
+
+
+
+<!-- <ul class="nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown test<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#">Submenu</a>
+                    <ul class="dropdown-menu">
+                        <li><a  href="#">Second level link</a></li>
+                        <li><a  href="#">Second level link</a></li>
+                        <li><a  href="#">Second level link</a></li>
+                        <li class="dropdown-submenu">
+                            <a  href="#">Submenu-submenu</a>
+                            <ul class="dropdown-menu">
+                                <li><a  href="#">Third level link</a></li>
+                                <li><a  href="#">Third level link</a></li>
+                                <li><a  href="#">Third level link</a></li>
+                                <li class="dropdown-submenu">
+                                    <a  href="#">Submenu-submenu-submenu</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a  href="#">Fourth level link</a></li>
+                                        <li><a  href="#">Fourth level link</a></li>
+                                        <li><a  href="#">Fourth level link</a></li>
+                                        <li><a  href="#">Fourth level link</a></li>
+                                        <li><a  href="#">Fourth level link</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Third level link</a></li>
+                            </ul>
+                        </li>
+                        <li><a  href="#">Second level link</a></li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+            </ul>
+        </li>
+    </ul>
+-->
